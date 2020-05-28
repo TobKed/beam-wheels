@@ -7,9 +7,11 @@ osx_image: xcode9.4
 
 env:
   global:
-      - VERSION=$(echo ${TRAVIS_BRANCH} | sed 's/release-//')
+#      - VERSION=$(echo ${TRAVIS_BRANCH} | sed 's/release-//')
+      - VERSION=2.21.0
       - PYTHON_ARTIFACTS_DIR=python
-      - STAGING=https://dist.apache.org/repos/dist/dev/beam/${VERSION}/${PYTHON_ARTIFACTS_DIR}
+#      - STAGING=https://dist.apache.org/repos/dist/dev/beam/${VERSION}/${PYTHON_ARTIFACTS_DIR}
+      - STAGING=https://files.pythonhosted.org/packages/94/7b/ca95d917805ac03a831aa1f6fe730706790d6d7b89d85e8f4b3964ecc7d1
       - ZIP_FILE=apache-beam-${VERSION}.zip
 
       - PLAT=x86_64
@@ -88,15 +90,15 @@ install:
 script:
     - build_wheel apache-beam-${VERSION} $PLAT
 
-deploy:
-  provider: gcs
-  access_key_id: ${ACCESS_KEY_ID}
-  secret_access_key: ${SECRET_ACCESS_KEY}
-  bucket: "beam-wheels-staging"
-  skip_cleanup: true
-  acl: public-read
-  local-dir: wheelhouse
-  edge:
-    branch: master
-  on:
-    all_branches: true
+#deploy:
+#  provider: gcs
+#  access_key_id: ${ACCESS_KEY_ID}
+#  secret_access_key: ${SECRET_ACCESS_KEY}
+#  bucket: "beam-wheels-staging"
+#  skip_cleanup: true
+#  acl: public-read
+#  local-dir: wheelhouse
+#  edge:
+#    branch: master
+#  on:
+#    all_branches: true
